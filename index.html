@@ -1,150 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Confession Message 💌</title>
-  <style>
-    body {
-      font-family: Arial; text-align: center; padding: 40px;
-      background: #f8f9fa; overflow: hidden; position: relative;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confession Message 💌</title>
+    <style>
+        /* CSS မူရင်းအတိုင်း */
+        body {
+            font-family: Arial; text-align: center; padding: 40px;
+            background: #f8f9fa; overflow: hidden; position: relative;
+        }
 
-    .floating {
-      position: absolute;
-      width: 30px;
-      height: 30px;
-      opacity: 0.8;
-      animation: floatUp linear infinite;
-    }
+        .floating {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            opacity: 0.8;
+            animation: floatUp linear infinite;
+        }
 
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0.5); opacity: 0.8; }
-      100% { transform: translateY(-50px) scale(1); opacity: 0; }
-    }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0.8; }
+            100% { transform: translateY(-50px) scale(1); opacity: 0; }
+        }
 
-    .modal {
-      display: none; position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%; background: rgba(0,0,0,0.6);
-      justify-content: center; align-items: center;
-      z-index: 10;
-    }
-    .modal-content {
-      background: #fff; padding: 20px; border-radius: 10px;
-      width: 90%; max-width: 400px; text-align: center;
-      position: relative;
-      z-index: 11;
-    }
+        .modal {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.6);
+            justify-content: center; align-items: center;
+            z-index: 10;
+        }
+        .modal-content {
+            background: #fff; padding: 20px; border-radius: 10px;
+            width: 90%; max-width: 400px; text-align: center;
+            position: relative;
+            z-index: 11;
+        }
 
-    input { width: 90%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px; }
-    button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-    #yesBtn { background: #28a745; color: white; }
-    #noBtn { background: #dc3545; color: white; }
-    #playAudioBtn { background: #007bff; color: white; margin-top: 10px; }
-  </style>
+        input { width: 90%; padding: 8px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        #yesBtn { background: #28a745; color: white; }
+        #noBtn { background: #dc3545; color: white; }
+        #playAudioBtn { background: #007bff; color: white; margin-top: 10px; }
+    </style>
 </head>
 <body>
 
 <h2>💬 Double-click to open confession 💬</h2>
 
 <div id="modal" class="modal">
-  <div class="modal-content">
-    <h3>မ ကျွန်တော်မကို သဘောကျတယ် 🥰</h3>
-    <p>ကျွန်တော်နဲ့ တွဲလို့ရမလား😘😘</p>
-    <button id="playAudioBtn">Play Music 🎵</button>
-    <div id="yesNoButtons" style="display:none; margin-top:10px;">
-      <button id="yesBtn">Yes</button>
-      <button id="noBtn">No</button>
+    <div class="modal-content">
+        <h3>မ ကျွန်တော်မကို သဘောကျတယ် 🥰</h3>
+        <p>ကျွန်တော်နဲ့ တွဲလို့ရမလား😘😘</p>
+        <button id="playAudioBtn">Play Music 🎵</button>
+        <div id="yesNoButtons" style="display:none; margin-top:10px;">
+            <button id="yesBtn">Yes</button>
+        </div>
     </div>
-  </div>
-</div>
-
-<div id="formModal" class="modal">
-  <div class="modal-content">
-    <h3>သင့်အမည်နဲ့လုပ်ကိုင်ရာ ဌာနထည့်ပါ 😍</h3>
-    <form id="confessionForm">
-      <input type="text" name="name" placeholder="အမည်" required><br>
-      <input type="text" name="department" placeholder="Department" required><br>
-      <input type="email" name="email" placeholder="Gmail Address" required><br>
-      <button type="submit" style="background:#007bff; color:#fff;">Send</button>
-    </form>
-  </div>
 </div>
 
 <audio id="bgMusic" src="crush.mp3" loop></audio>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-emailjs.init("xf1L8bz-OBRLTV_FJ");
+    emailjs.init("xf1L8bz-OBRLTV_FJ");
 
-const modal = document.getElementById('modal');
-const formModal = document.getElementById('formModal');
-const yesBtn = document.getElementById('yesBtn');
-const noBtn = document.getElementById('noBtn');
-const playAudioBtn = document.getElementById('playAudioBtn');
-const yesNoButtons = document.getElementById('yesNoButtons');
-const form = document.getElementById('confessionForm');
-const bgMusic = document.getElementById('bgMusic');
+    const modal = document.getElementById('modal');
+    // const formModal = document.getElementById('formModal'); // ဖယ်ရှား
+    const yesBtn = document.getElementById('yesBtn');
+    // const noBtn = document.getElementById('noBtn'); // ဖယ်ရှား
+    const playAudioBtn = document.getElementById('playAudioBtn');
+    const yesNoButtons = document.getElementById('yesNoButtons');
+    // const form = document.getElementById('confessionForm'); // ဖယ်ရှား
+    const bgMusic = document.getElementById('bgMusic');
 
-document.body.ondblclick = () => {
-  modal.style.display = 'flex';
-};
+    document.body.ondblclick = () => {
+        modal.style.display = 'flex';
+    };
 
-// ❌ No Button disabled
-noBtn.addEventListener('click', () => {
-  alert('ကျွန်တော် မ အဖြေကို လက်မခံဘူး 😢');
-});
-noBtn.disabled = true;
-
-// ✅ Play Audio then show Yes/No
-playAudioBtn.addEventListener('click', () => {
-  bgMusic.play().then(() => {
-    yesNoButtons.style.display = 'block';
-    playAudioBtn.style.display = 'none';
-    createFloatingElements(); // Start background animation
-  }).catch(err => {
-    console.log("Cannot play audio:", err);
-  });
-});
-
-// ✅ Yes Button
-yesBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-  formModal.style.display = 'flex';
-});
-
-// 📨 Form Submission
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const emailValue = form.email.value;
-  if (!emailValue.endsWith("@gmail.com")) {
-    alert("Gmail သာ လက်ခံပါမယ်!");
-    return;
-  }
-  emailjs.sendForm('service_rg8cov2', 'template_52s3vub', this)
-    .then(() => {
-      alert("မေ့မနိုင်တဲ့ Confession ပေးပို့ပြီးပါပြီ 😍");
-      formModal.style.display = 'none';
-    }, (error) => {
-      alert("Error: " + JSON.stringify(error));
+    // Modal ကို ပိတ်ခြင်း တားဆီးရန် (ယခင် feature အတိုင်း ဆက်ထားပါတယ်)
+    modal.addEventListener('click', (e) => {
+        if (e.target.id === 'modal') {
+            alert("ဘယ်မှ ထွက်လို့ မရသေးပါဘူး။ 'Yes' ကို နှိပ်ပြီး အဖြေပေးဖို့လိုပါတယ် 😉");
+        }
     });
-});
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            alert("လွတ်လမ်း မရှိသေးပါဘူး 😜");
+        }
+    });
 
-// 🌸 Floating Hearts & Flowers
-function createFloatingElements() {
-  const colors = ["❤️","💖","💗","🌸","🌹"];
-  for(let i=0; i<30; i++){
-    const span = document.createElement('span');
-    span.className = 'floating';
-    span.style.left = Math.random() * 100 + "vw";
-    span.style.fontSize = (10 + Math.random()*20) + "px";
-    span.textContent = colors[Math.floor(Math.random()*colors.length)];
-    span.style.animationDuration = (5 + Math.random()*5) + "s";
-    document.body.appendChild(span);
-    span.addEventListener('animationend', () => span.remove());
-  }
-  setTimeout(createFloatingElements, 1000);
-}
+    // ✅ Play Audio then show Yes/No
+    playAudioBtn.addEventListener('click', () => {
+        bgMusic.play().then(() => {
+            yesNoButtons.style.display = 'block';
+            playAudioBtn.style.display = 'none';
+            createFloatingElements(); // Start background animation
+        }).catch(err => {
+            console.log("Cannot play audio:", err);
+        });
+    });
+
+    // ✅ Yes Button (Email တိုက်ရိုက် ပို့ရန်)
+    yesBtn.addEventListener('click', () => {
+        // Yes နှိပ်တာနဲ့ EmailJS ကို တိုက်ရိုက်ခေါ်ပြီး ပို့မယ့် Message ကို ထည့်ပေးမယ်။
+
+        emailjs.send('service_rg8cov2', 'template_52s3vub')
+            .then(() => {
+                alert("မင်းလေးကို ဖွင့်ပြောတဲ့ သူကို Confession Acception Message ပေးပို့ပြီးပါပြီ။ ပြောရွှင်စရာ ကောင်းလွန်းတဲ့ Relationship ကို တည်ဆောက်နိုင်ပါစေ 😍");
+                modal.style.display = 'none';
+                bgMusic.pause(); // သီချင်းကို ရပ်ပါ
+            }, (error) => {
+                alert("Email ပို့ရာတွင် အမှားအယွင်းရှိပါသည်: " + JSON.stringify(error));
+            });
+    });
+
+    // 📨 Form Submission (ဖယ်ရှားပြီး)
+    // form.addEventListener('submit', function(e) { ... });
+
+    // 🌸 Floating Hearts & Flowers (မူရင်းအတိုင်း)
+    function createFloatingElements() {
+        const colors = ["❤️","💖","💗","🌸","🌹"];
+        for(let i=0; i<30; i++){
+            const span = document.createElement('span');
+            span.className = 'floating';
+            span.style.left = Math.random() * 100 + "vw";
+            span.style.fontSize = (10 + Math.random()*20) + "px";
+            span.textContent = colors[Math.floor(Math.random()*colors.length)];
+            span.style.animationDuration = (5 + Math.random()*5) + "s";
+            document.body.appendChild(span);
+            span.addEventListener('animationend', () => span.remove());
+        }
+        setTimeout(createFloatingElements, 1000);
+    }
 </script>
 
 </body>
